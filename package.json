@@ -1,0 +1,49 @@
+{
+  "name": "2019-nCoV",
+  "author": "swansswansswansswansosoft",
+  "version": "1.0.0",
+  "keywords": [
+    "pebble-app"
+  ],
+  "private": true,
+  "dependencies": {
+    "moment": "^2.24.0",
+    "papaparse": "^5.1.1",
+    "pebble-clay": "^1.0.4"
+  },
+  "pebble": {
+    "displayName": "2019-nCoV",
+    "capabilities": [
+      "geolocation",
+      "configurable"
+    ],
+    "uuid": "38d302ba-de97-4423-9ccd-828823c61900",
+    "sdkVersion": "3",
+    "enableMultiJS": true,
+    "targetPlatforms": [
+      "aplite",
+      "basalt",
+      "chalk",
+      "diorite"
+    ],
+    "watchapp": {
+      "watchface": false
+    },
+    "messageKeys": {
+      "Distance": 0,
+      "Location": 1,
+      "LocationCases": 2,
+      "ClosestCases": 3
+    },
+    "resources": {
+      "media": [
+        {
+          "menuIcon": true,
+          "type": "png",
+          "name": "IMAGE_MENU_ICON",
+          "file": "menu_icon.png"
+        }
+      ]
+    }
+  }
+}
