@@ -10,6 +10,11 @@ var yourLocation = {
 }
 
 var lastSync = "";
+var units = "M";
+var customLocation = false;
+
+// localStorage.clear();
+
 
 Pebble.addEventListener('showConfiguration', function(e) {
     Pebble.openURL(clay.generateUrl());
@@ -23,16 +28,32 @@ Pebble.addEventListener('webviewclosed', function(e) {
     if (configuration.CustomLat.value && configuration.CustomLat.value != "" & configuration.CustomLong.value && configuration.CustomLong.value != "") {
         yourLocation.lat = configuration.CustomLat.value;
         yourLocation.long = configuration.CustomLong.value;
-        getCoronaData();
+        customLocation = true;
+        localStorage.setItem("customLocation", JSON.stringify(yourLocation));
     } else {
-        navigator.geolocation.getCurrentPosition(success, error, options);
+        customLocation = false;
+        localStorage.removeItem("customLocation");
     }
+    // console.log('custom units: ' + configuration.CustomUnits.value);
+    units = configuration.CustomUnits.value;
+    localStorage.setItem("customUnits", units);
+    fetchAll();
 });
 
 Pebble.addEventListener('ready', function() {
     lastSync = localStorage.getItem("lastSync");
-    if (lastSync == "" || lastSync != moment().format("MM-DD-YYYY")){
-        navigator.geolocation.getCurrentPosition(success, error, options);
+    var customLocation = localStorage.getItem("customLocation");
+    if (customLocation){
+        yourLocation = customLocation;
+        customLocation = true;
+    };
+    var customUnits = localStorage.getItem("customUnits");
+    if (customUnits) {
+        units = customUnits;
+    }
+    // if (lastSync == "" || lastSync != moment().format("MM-DD-YYYY")){
+    if (lastSync == "" || (new Date().getTime() - lastSync) > 3.6e+6 ){
+        fetchAll();
         console.log('fetching fresh');
     } else {
         var virusData = JSON.parse(localStorage.getItem("virusData"));
@@ -41,6 +62,13 @@ Pebble.addEventListener('ready', function() {
     };
     // navigator.geolocation.getCurrentPosition(success, error, options);
 
+});
+
+Pebble.addEventListener('appmessage', function(e) {
+    var doUpdate = e.payload["RequestUpdate"];
+    if(doUpdate){
+        fetchAll();
+    }
 });
 
 function success(pos) {
@@ -59,6 +87,14 @@ var options = {
     enableHighAccuracy: true,
     timeout: 10000
 };
+
+function fetchAll(){
+    if (customLocation) {
+        getCoronaData();
+    } else {
+        navigator.geolocation.getCurrentPosition(success, error, options);
+    }
+}
 
 function getCoronaData(){
     Papa.parse('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv',
@@ -79,7 +115,7 @@ function getCoronaData(){
                         location:locString,
                         lat: location[2],
                         long: location[3],
-                        distance: Math.round(distance(location[2], location[3],  yourLocation.lat, yourLocation.long, "M")),
+                        distance: Math.round(distance(location[2], location[3],  yourLocation.lat, yourLocation.long, units)),
                         count:count
                     }
                     if(!locString.includes("Diamond Princess")){
@@ -90,16 +126,17 @@ function getCoronaData(){
             modified.sort((a, b) => (a.distance > b.distance) ? 1 : -1);
             console.log(JSON.stringify(modified[0]));
             var closestLocations = "";
-            for (let i=0; i < 4; i++){
-                closestLocations += modified[i].distance+"mi, " + modified[i].count + " cases" + "\n" + modified[i].location + "\n" + "\n";
+            for (let i=0; i < 5; i++){
+                closestLocations += modified[i].location + "\n" + modified[i].distance+displayUnits(units)+", " + modified[i].count + " cases" + "\n" ;
             }
             var virusData = {
-                "Distance": modified[0].distance+"mi",
+                "Distance": modified[0].distance+displayUnits(units),
                 "Location": modified[0].location,
                 "LocationCases": modified[0].count + " cases",
                 "ClosestCases": closestLocations
             };
-            localStorage.setItem("lastSync", moment().format("MM-DD-YYYY"));
+            // localStorage.setItem("lastSync", moment().format("MM-DD-YYYY"));
+            localStorage.setItem("lastSync", new Date().getTime());
             localStorage.setItem("virusData", JSON.stringify(virusData));
             Pebble.sendAppMessage(virusData);
             // console.log(JSON.stringify(modified));
@@ -158,4 +195,12 @@ function distance(lat1, lon1, lat2, lon2, unit) {
 		if (unit=="N") { dist = dist * 0.8684 }
 		return dist;
 	}
+}
+
+function displayUnits(unit){
+    switch(unit){
+        case "M": return "mi";
+        case "K": return "km";
+        case "N": return "na";
+    }
 }

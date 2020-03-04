@@ -27,6 +27,35 @@
         "type":"section",
         "items":[
             {
+            "type": "heading",
+            "defaultValue": "configuration"
+            },
+            {
+            "type": "text",
+            "defaultValue": "Make manual adjustments here. To return to default settings simply clear all values and then press 'SAVE"
+            },
+            {
+                "type":"select",
+                "messageKey":"CustomUnits",
+                "label":"units",
+                "description":"distance units displayed by the app",
+                "defaultValue":"M",
+                "options":[
+                    {
+                        "label":"miles",
+                        "value":"M"
+                    },
+                    {
+                        "label":"kilometers",
+                        "value":"K"
+                    },
+                    {
+                        "label":"nautical miles",
+                        "value":"N"
+                    }
+                ]
+            },
+            {
                 "type":"input",
                 "messageKey":"CustomLat",
                 "label":"latitude",
