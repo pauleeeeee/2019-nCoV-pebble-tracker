@@ -13,6 +13,14 @@ static char s_closest_cases[512];
 static void prv_select_click_handler(ClickRecognizerRef recognizer, void *context) {
 }
 
+static void prv_long_select_click_handler(ClickRecognizerRef recognizer, void *context) {
+    text_layer_set_text(s_distance_layer, "loading");
+    DictionaryIterator *iter;
+    app_message_outbox_begin(&iter);
+    dict_write_cstring(iter, RequestUpdate, "update");
+    app_message_outbox_send();
+}
+
 static void prv_up_click_handler(ClickRecognizerRef recognizer, void *context) {
 }
 
@@ -22,6 +30,7 @@ static void prv_down_click_handler(ClickRecognizerRef recognizer, void *context)
 
 static void prv_click_config_provider(void *context) {
   window_single_click_subscribe(BUTTON_ID_SELECT, prv_select_click_handler);
+  window_long_click_subscribe(BUTTON_ID_SELECT, 500, prv_long_select_click_handler, NULL);
   window_single_click_subscribe(BUTTON_ID_UP, prv_up_click_handler);
   window_single_click_subscribe(BUTTON_ID_DOWN, prv_down_click_handler);
 }
