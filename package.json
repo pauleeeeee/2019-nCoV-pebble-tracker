@@ -33,7 +33,8 @@
       "Distance": 0,
       "Location": 1,
       "LocationCases": 2,
-      "ClosestCases": 3
+      "ClosestCases": 3,
+      "RequestUpdate": 4
     },
     "resources": {
       "media": [
