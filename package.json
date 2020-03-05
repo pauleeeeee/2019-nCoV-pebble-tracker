@@ -34,7 +34,8 @@
       "Location": 1,
       "LocationCases": 2,
       "ClosestCases": 3,
-      "RequestUpdate": 4
+      "RequestUpdate": 4,
+      "MinCases": 5
     },
     "resources": {
       "media": [
