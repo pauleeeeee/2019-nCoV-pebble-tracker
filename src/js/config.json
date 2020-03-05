@@ -66,6 +66,15 @@
                 "messageKey":"CustomLong",
                 "label":"longitude",
                 "description":"enter your location's longitude"
+            },
+            {
+                "type":"slider",
+                "defaultValue":"5",
+                "min":"0",
+                "max":"10",
+                "step":"1",
+                "description":"filter results by minimum number of cases in each location",
+                "messageKey":"MinCases"
             }
         ]
     },

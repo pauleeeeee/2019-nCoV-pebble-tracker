@@ -12,6 +12,7 @@ var yourLocation = {
 var lastSync = "";
 var units = "M";
 var customLocation = false;
+var minCases = 5;
 
 // localStorage.clear();
 
@@ -37,6 +38,8 @@ Pebble.addEventListener('webviewclosed', function(e) {
     // console.log('custom units: ' + configuration.CustomUnits.value);
     units = configuration.CustomUnits.value;
     localStorage.setItem("customUnits", units);
+    minCases = configuration.MinCases.value;
+    localStorage.setItem("minCases", minCases);
     fetchAll();
 });
 
@@ -50,6 +53,10 @@ Pebble.addEventListener('ready', function() {
     var customUnits = localStorage.getItem("customUnits");
     if (customUnits) {
         units = customUnits;
+    }
+    cases = localStorage.getItem("minCases");
+    if(cases){
+        minCases = cases;
     }
     // if (lastSync == "" || lastSync != moment().format("MM-DD-YYYY")){
     if (lastSync == "" || (new Date().getTime() - lastSync) > 3.6e+6 ){
@@ -104,7 +111,7 @@ function getCoronaData(){
             var modified = [];
             for (let location of results.data){
                 var count = location[location.length-1];
-                if (count>4){
+                if (count>minCases){
                     var locString = "";
                     if(location[0].length > 1){
                         locString = location[0] + ", " + location[1];
