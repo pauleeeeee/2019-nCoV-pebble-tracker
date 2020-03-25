@@ -1,14 +1,14 @@
 {
   "name": "2019-nCoV",
-  "author": "swansswansswansswansosoft",
-  "version": "1.0.0",
+  "author": "swansswansswansswanssosoft",
+  "version": "2.0.0",
   "keywords": [
     "pebble-app"
   ],
   "private": true,
   "dependencies": {
-    "moment": "^2.24.0",
-    "papaparse": "^5.1.1",
+    "message-queue-pebble": "^1.0.0",
+    "pdc-transform": "^2.0.4",
     "pebble-clay": "^1.0.4"
   },
   "pebble": {
@@ -32,10 +32,13 @@
     "messageKeys": {
       "Distance": 0,
       "Location": 1,
-      "LocationCases": 2,
-      "ClosestCases": 3,
-      "RequestUpdate": 4,
-      "MinCases": 5
+      "Cases": 2,
+      "Deaths": 3,
+      "Recovered": 4,
+      "Scope": 5,
+      "Ready": 6,
+      "RequestUpdate": 20,
+      "MinCases": 21
     },
     "resources": {
       "media": [
@@ -44,6 +47,26 @@
           "type": "png",
           "name": "IMAGE_MENU_ICON",
           "file": "menu_icon.png"
+        },
+        {
+          "type": "raw",
+          "name": "CORONA_CELL_GIANT",
+          "file": "corona_cell_giant.pdc"
+        },
+        {
+          "type": "raw",
+          "name": "CORONA_CELL_SMALL",
+          "file": "corona_cell_small.pdc"
+        },
+        {
+          "type": "raw",
+          "name": "CORONA_CELL_MEDIUM",
+          "file": "corona_cell_medium.pdc"
+        },
+        {
+          "type": "raw",
+          "name": "CORONA_CELL_LARGE",
+          "file": "corona_cell_large.pdc"
         }
       ]
     }
