@@ -22,6 +22,7 @@ static int s_scale_increment;
 static int s_angle;
 static AppTimer *s_animation_timer;
 static bool is_animating = false;
+static bool only_two = false;
 
 //for displayed data
 static LocationStats s_location_stats[3];
@@ -60,7 +61,6 @@ static void update_text(){
   text_layer_set_text(s_cases_layer, s_location_stats[s_selected_index].cases);
   text_layer_set_text(s_deaths_layer, s_location_stats[s_selected_index].deaths);
   text_layer_set_text(s_recovered_layer, s_location_stats[s_selected_index].recovered);
-
 }
 
 static void drift_up(){
@@ -127,8 +127,7 @@ static void top_down(){
 
 }
 
-static void prv_up_click_handler(ClickRecognizerRef recognizer, void *context) {
-  if(s_selected_index > 0 && (!is_animating)){
+static void go_up(){
     is_animating = true;
     s_selected_index--;
     GRect bounds = layer_get_bounds(window_get_root_layer(s_window));
@@ -140,6 +139,14 @@ static void prv_up_click_handler(ClickRecognizerRef recognizer, void *context) {
     app_timer_register(200, top_down, NULL);
     drift_down();
     app_timer_register(1200, clear_animating, NULL);
+
+}
+
+static void prv_up_click_handler(ClickRecognizerRef recognizer, void *context) {
+  if(s_selected_index > 0 && (!is_animating) && !only_two){
+    go_up();
+  } else if (only_two && s_selected_index > 1){
+    go_up();
   }
 
 }
@@ -506,6 +513,12 @@ static void in_received_handler(DictionaryIterator *iter, void *context) {
       APP_LOG(APP_LOG_LEVEL_DEBUG, "got ready tuple %d", 1);
       text_layer_set_text(s_loading_layer, "");
       layer_set_hidden(s_stats_layer, false);
+      update_text();
+    } else if (ready_tuple->value->int32 == 2) {
+      text_layer_set_text(s_loading_layer, "");
+      layer_set_hidden(s_stats_layer, false);
+      s_selected_index = 1;
+      only_two = true;
       update_text();
     }
     // text_layer_set_text(s_cases_layer, recovered_tuple->value->cstring);
