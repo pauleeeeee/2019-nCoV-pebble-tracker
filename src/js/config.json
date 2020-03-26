@@ -5,23 +5,15 @@
     }, 
     { 
         "type": "text", 
-        "defaultValue": "This app shows you the nearest outbreak of the COVID 19 (2019-nCoV) virus aka 'Coronavirus' to your location. The data is supplied by Johns Hopkins University Center for Systems Science and Engineering (JHU CCSE) (https://github.com/CSSEGISandData/COVID-19)." 
+        "defaultValue": "This app shows you the known active COVID-19 cases near you along with the number of deaths number recovered. The data is supplied by Johns Hopkins University Center for Systems Science and Engineering (JHU CCSE) (https://github.com/CSSEGISandData/COVID-19). Other data sources include https://worldometer/coronavirus/" 
     },
     { 
         "type": "text", 
-        "defaultValue": "The datasource is updated once daily, around 23:59 (UTC). This app filters locations by two criteria:" 
+        "defaultValue": "Most of the data is pulled from sources that update fairly frequently (every 10 minutes even). Some data, like state-level data may only be updated once a day." 
     },
     { 
         "type": "text", 
-        "defaultValue": "1) Locations with 5 or fewer reported cases of the virus are not considered." 
-    },
-    { 
-        "type": "text", 
-        "defaultValue": "2) All cases listed in the dataset associated with the Diamond Princess cruise ship are not considered." 
-    },
-    { 
-        "type": "text", 
-        "defaultValue": "You can press the up button to see the four nearest locations. More features to come. This app is tested and working on Android. Some iOS users have reported that the app launches but sits at the 'loading' screen. If this happens to you try manually setting your location coordinates in the boxes below and press 'SAVE'." 
+        "defaultValue": "If the app inaccurately detects your location, then you can set the coordinates manually below." 
     },
     {
         "type":"section",
@@ -35,27 +27,6 @@
             "defaultValue": "Make manual adjustments here. To return to default settings simply clear all values and then press 'SAVE"
             },
             {
-                "type":"select",
-                "messageKey":"CustomUnits",
-                "label":"units",
-                "description":"distance units displayed by the app",
-                "defaultValue":"M",
-                "options":[
-                    {
-                        "label":"miles",
-                        "value":"M"
-                    },
-                    {
-                        "label":"kilometers",
-                        "value":"K"
-                    },
-                    {
-                        "label":"nautical miles",
-                        "value":"N"
-                    }
-                ]
-            },
-            {
                 "type":"input",
                 "messageKey":"CustomLat",
                 "label":"latitude",
@@ -66,15 +37,6 @@
                 "messageKey":"CustomLong",
                 "label":"longitude",
                 "description":"enter your location's longitude"
-            },
-            {
-                "type":"slider",
-                "defaultValue":"5",
-                "min":"0",
-                "max":"10",
-                "step":"1",
-                "description":"filter results by minimum number of cases in each location",
-                "messageKey":"MinCases"
             }
         ]
     },
