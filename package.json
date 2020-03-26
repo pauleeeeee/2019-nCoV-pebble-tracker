@@ -1,7 +1,7 @@
 {
   "name": "2019-nCoV",
   "author": "swansswansswansswanssosoft",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "keywords": [
     "pebble-app"
   ],
@@ -9,7 +9,8 @@
   "dependencies": {
     "message-queue-pebble": "^1.0.0",
     "pdc-transform": "^2.0.4",
-    "pebble-clay": "^1.0.4"
+    "pebble-clay": "^1.0.4",
+    "point2place": "^0.1.3"
   },
   "pebble": {
     "displayName": "2019-nCoV",
