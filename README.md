@@ -4,5 +4,3 @@ Pebble smartwatch app that shows you the nearest outbreak location and number of
 The datasource is updated fairly frequently - as often as every 10 minutes for world data. Some data is updated just once daily, around 23:59 (UTC).
 
 If your country has province / state level data... your nearest province or state will be shown on the first screen. Then you can press down to scroll to your country's data and then again to the world's data.
-
-Tested and working on Android. Does not appear to work on iOS. Open to pull requests to make it available for both platforms!
