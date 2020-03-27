@@ -532,6 +532,7 @@ static void in_received_handler(DictionaryIterator *iter, void *context) {
 
 static void in_dropped_handler(AppMessageResult reason, void *context){
   //handle failed message
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "dropped message %d", 0);
 }
 
 static void prv_init(void) {
@@ -547,7 +548,7 @@ static void prv_init(void) {
   //instantiate appmessages
   app_message_register_inbox_received(in_received_handler);
   app_message_register_inbox_dropped(in_dropped_handler);
-  app_message_open(app_message_inbox_size_maximum(), app_message_outbox_size_maximum());
+  app_message_open(64, 64);
 
 }
 
