@@ -71,7 +71,7 @@ function getWorld(){
             if(req.status == 200) {
                 var worldData = JSON.parse(req.responseText);
                 //{"cases":468012,"deaths":21180,"recovered":113809,"updated":1585179172282}
-                worldStats.Cases = worldData.cases + "";
+                worldStats.Cases = filterNumber(worldData.cases);
                 worldStats.Deaths = worldData.deaths + "";
                 worldStats.Recovered = worldData.recovered + "";
                 console.log('sending world');
@@ -112,7 +112,7 @@ function getCountry(){
                 // }
                 var countryData = {
                     'Location': country,
-                    'Cases': data.cases + "",
+                    'Cases': filterNumber(data.cases),
                     'Deaths': data.deaths + "",
                     'Recovered': data.recovered + "",
                     'Scope': 1
@@ -165,3 +165,14 @@ function getState(){
     req.send();
 
 };
+
+function filterNumber(number){
+    if (number < 2000000){
+        return number + "";
+    } else if (number >= 2000000 ){
+        number = (number/1000000).toFixed(1);
+        number += "M";
+        console.log(number);
+        return number;
+    }
+}
