@@ -166,10 +166,6 @@
                     "value":"Cayman Islands"
                     },
                     {
-                    "label":"Central African Republic",
-                    "value":"Central African Republic"
-                    },
-                    {
                     "label":"Chad",
                     "value":"Chad"
                     },
@@ -198,8 +194,8 @@
                     "value":"Congo"
                     },
                     {
-                    "label":"Congo,the Democratic Republic of the",
-                    "value":"Congo,the Democratic Republic of the"
+                    "label":"Congo",
+                    "value":"Congo"
                     },
                     {
                     "label":"Costa Rica",
@@ -386,8 +382,8 @@
                     "value":"Indonesia"
                     },
                     {
-                    "label":"Iran, Islamic Republic of",
-                    "value":"Iran, Islamic Republic of"
+                    "label":"Iran",
+                    "value":"Iran"
                     },
                     {
                     "label":"Iraq",
@@ -810,12 +806,12 @@
                     "value":"Uzbekistan"
                     },
                     {
-                    "label":"Venezuela, Bolivarian Republic of",
-                    "value":"Venezuela, Bolivarian Republic of"
+                    "label":"Venezuela",
+                    "value":"Venezuela"
                     },
                     {
-                    "label":"Viet Nam",
-                    "value":"Viet Nam"
+                    "label":"Vietnam",
+                    "value":"Vietnam"
                     },
                     {
                     "label":"Zambia",
