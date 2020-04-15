@@ -415,7 +415,7 @@ static void prv_window_load(Window *window) {
   layer_add_child(s_foreground_layer, s_corona_cell_layers[5]);
 
   s_corona_cells[2] = gdraw_command_image_create_with_resource(RESOURCE_ID_CORONA_CELL_LARGE);
-  s_corona_cell_layers[2] = layer_create(GRect(bounds.size.w-35, (bounds.size.h * 2) + (bounds.size.h / 2), 100, 100));
+  s_corona_cell_layers[2] = layer_create(GRect(bounds.size.w-25, (bounds.size.h * 2) + (bounds.size.h / 2), 100, 100));
   layer_set_update_proc(s_corona_cell_layers[2],s_c_c_l_u_p_2);
   layer_add_child(s_foreground_layer, s_corona_cell_layers[2]);
 
