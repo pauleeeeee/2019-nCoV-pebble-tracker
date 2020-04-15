@@ -1,7 +1,7 @@
 {
   "name": "2019-nCoV",
   "author": "swansswansswansswanssosoft",
-  "version": "2.2.0",
+  "version": "2.4.0",
   "keywords": [
     "pebble-app"
   ],
@@ -14,7 +14,6 @@
   "pebble": {
     "displayName": "2019-nCoV",
     "capabilities": [
-      "geolocation",
       "configurable"
     ],
     "uuid": "38d302ba-de97-4423-9ccd-828823c61900",
@@ -38,7 +37,6 @@
       "Scope": 5,
       "Ready": 6,
       "RequestUpdate": 20,
-      "MinCases": 21,
       "Country": 22,
       "StateProvince": 23
     },
