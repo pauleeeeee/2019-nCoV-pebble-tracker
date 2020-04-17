@@ -64,7 +64,7 @@ function getWorld(){
         'Scope': 2
     };
     var req = new XMLHttpRequest();
-    req.open('GET', "https://corona.lmao.ninja/all", true);
+    req.open('GET', "https://corona.lmao.ninja/v2/all", true);
     req.onload = function(e) {
         if (req.readyState == 4) {
           // 200 - HTTP OK
@@ -98,7 +98,7 @@ function onFailure(data, error){
 
 function getCountry(){
     var req = new XMLHttpRequest();
-    req.open('GET', "https://corona.lmao.ninja/countries/" + country, true);
+    req.open('GET', "https://corona.lmao.ninja/v2/countries/" + country, true);
     req.onload = function(e) {
         if (req.readyState == 4) {
           // 200 - HTTP OK
@@ -133,7 +133,7 @@ function getCountry(){
 
 function getState(){
     var req = new XMLHttpRequest();
-    req.open('GET', "https://corona.lmao.ninja/states/", true);
+    req.open('GET', "https://corona.lmao.ninja/v2/states/", true);
     req.onload = function(e) {
         if (req.readyState == 4) {
           // 200 - HTTP OK
