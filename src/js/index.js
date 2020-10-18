@@ -72,8 +72,8 @@ function getWorld(){
                 var worldData = JSON.parse(req.responseText);
                 //{"cases":468012,"deaths":21180,"recovered":113809,"updated":1585179172282}
                 worldStats.Cases = filterNumber(worldData.cases);
-                worldStats.Deaths = worldData.deaths + "";
-                worldStats.Recovered = worldData.recovered + "";
+                worldStats.Deaths = filterNumber(worldData.deaths);
+                worldStats.Recovered = filterNumber(worldData.recovered);
                 console.log('sending world');
                 console.log(JSON.stringify(worldStats));
                 MessageQueue.sendAppMessage(worldStats, onSuccess, onFailure);
@@ -113,8 +113,8 @@ function getCountry(){
                 var countryData = {
                     'Location': country,
                     'Cases': filterNumber(data.cases),
-                    'Deaths': data.deaths + "",
-                    'Recovered': data.recovered + "",
+                    'Deaths': filterNumber(data.deaths),
+                    'Recovered': filterNumber(data.recovered),
                     'Scope': 1
                 };
                 console.log('sending country');
